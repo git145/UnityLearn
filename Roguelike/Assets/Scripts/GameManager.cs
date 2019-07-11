@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
 
     private BoardManager boardScript;                        //Store a reference to our BoardManager which will set up the level.
 
-    private int level = 3;                                    //Current level number, expressed in game as "Day 1".
+    public int playerFoodPoints = 100;
+
+    [HideInInspector] public bool playersTurn = true;
+
+    private int level = 1;                                    //Current level number, expressed in game as "Day 1".
 
     //Awake is always called before any Start functions
     void Awake()

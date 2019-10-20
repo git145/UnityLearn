@@ -14,11 +14,25 @@ public class TextInput : MonoBehaviour
         _inputField.onEndEdit.AddListener(AcceptStringInput);
     }
 
-    private void AcceptStringInput(string userInput)
+    void AcceptStringInput(string userInput)
     {
         userInput = userInput.ToLower();
 
         _controller.LogStringWithReturn(userInput);
+
+        char[] delimiterCharacters = { ' ' };
+
+        string[] separatedInputWords = userInput.Split(delimiterCharacters);
+
+        for (int i = 0; i < _controller.InputActions.Length; i++)
+        {
+            InputAction inputAction = _controller.InputActions[i];
+
+            if (inputAction.KeyWord == separatedInputWords[0])
+            {
+                inputAction.RespondToInput(_controller, separatedInputWords);
+            }
+        }
 
         InputComplete();
     }

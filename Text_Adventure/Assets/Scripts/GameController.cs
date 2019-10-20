@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public Text DisplayText;
+
+    public InputAction[] InputActions;
 
     [HideInInspector] public RoomNavigation RoomNavigation;
 
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
 
     public void DisplayRoomText()
     {
+        ClearCollectionsForNewRoom();
+
         UnpackRoom();
 
         string joinedInteractionDescriptions = string.Join("\n", InteractionDescriptionsInRoom.ToArray());
@@ -50,5 +54,12 @@ public class GameController : MonoBehaviour
     private void UnpackRoom()
     {
         RoomNavigation.UnpackExitsInRoom();
+    }
+
+    private void ClearCollectionsForNewRoom()
+    {
+        InteractionDescriptionsInRoom.Clear();
+
+        RoomNavigation.ClearExits();
     }
 }
